@@ -15,25 +15,29 @@ public class AuthorService {
         this.authorRepo = authorRepo;
     }
 
-    public List<Author> getAuthorSetById() {
-        //return authorRepo.findBookAuthorSetByBookId(225);
-        return authorRepo.getAuthorSetById();
+    public Author add(Author author) {
+        authorRepo.save(author);
+        return findByFirstName(author.getFirstName());
     }
 
-    public Author findFirstNameById() {
-        Author author = authorRepo.findFirstNameById(193L);
+    private Author findByFirstName(String name){
+        return authorRepo.findByFirstName(name);
+    }
+
+    public void delete(int id){
+        authorRepo.deleteById(id);
+    }
+
+    public List<Author> getAll(){
+        List<Author> authors = authorRepo.findAll();
+        for (Author item : authors)
+            item.setBookSet(null);
+        return authors;
+    }
+
+    public Author findById(int id) {
+        Author author = authorRepo.findById(id);
         author.setBookSet(null);
-
-        /*Query q = em.createNativeQuery("SELECT a.firstname, a.lastname FROM Author a");
-        List<Object[]> authors = q.getResultList();
-
-        for (Object[] a : authors) {
-            System.out.println("Author "
-                    + a[0]
-                    + " "
-                    + a[1]);
-        }*/
-
         return author;
     }
 }

@@ -27,8 +27,8 @@ public class Book {
     @ManyToMany
     @JoinTable(
             name = "Link",
-            joinColumns = @JoinColumn(name = "bookId"),
-            inverseJoinColumns = @JoinColumn(name = "authorId")
+            joinColumns = @JoinColumn(name = "book_Id"),
+            inverseJoinColumns = @JoinColumn(name = "author_Id")
     )
     private Set<Author> authorSet = new HashSet<>();
 

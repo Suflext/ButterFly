@@ -1,18 +1,14 @@
 package ru.library.libraryapp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import ru.library.libraryapp.entity.Author;
 
-import java.util.List;
 
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
-    @Query("Select b.authorSet From Book b Where b.id = 225")
-    List<Author> getAuthorSetById();
+    Author findById(long id);
 
-    @Query("Select b.firstName From Author b Where b.id = ?1")
-    Author findFirstNameById(long id);
-    //@Query(nativeQuery = true)
+    Author findByFirstName(String FirstName);
 
+    void deleteById(long id);
 }

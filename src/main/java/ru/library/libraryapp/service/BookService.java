@@ -15,14 +15,30 @@ public class BookService {
         this.bookRepo = bookRepo;
     }
 
-    public Book getBookById() {
-        Book book = bookRepo.findById(225L);
-        book.setAuthorSet(null);
-        return book;
+    public Book add(Book book) {
+        bookRepo.save(book);
+        return findByName(book.getName());
     }
 
-    public List<Book> getBookSetById() {
-        return bookRepo.getBookSetById();
+    private Book findByName(String name){
+        return bookRepo.findByName(name);
+    }
+
+    public void delete(int id){
+        bookRepo.deleteById(id);
+    }
+
+    public List<Book> getAll(){
+        List<Book> authors = bookRepo.findAll();
+        for (Book item : authors)
+            item.setAuthorSet(null);
+        return authors;
+    }
+
+    public Book findById(int id) {
+        Book author = bookRepo.findById(id);
+        author.setAuthorSet(null);
+        return author;
     }
 
 }

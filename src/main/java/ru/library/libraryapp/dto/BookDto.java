@@ -1,10 +1,5 @@
 package ru.library.libraryapp.dto;
 
-import ru.library.libraryapp.entity.Author;
-
-import java.util.HashSet;
-import java.util.Set;
-
 public class BookDto {
 
     private long id;
@@ -16,8 +11,6 @@ public class BookDto {
     private String published;
 
     private long year;
-
-    private Set<Author> authorSet = new HashSet<>();
 
     public long getId() {
         return id;
@@ -57,13 +50,5 @@ public class BookDto {
 
     public void setYear(long year) {
         this.year = year;
-    }
-
-    public Set<Author> getAuthorSet() {
-        return authorSet;
-    }
-
-    public void setAuthorSet(Set<Author> authorSet) {
-        this.authorSet = authorSet;
     }
 }
