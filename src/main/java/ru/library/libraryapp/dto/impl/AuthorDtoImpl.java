@@ -17,6 +17,10 @@ public class AuthorDtoImpl implements AuthorDto {
 
     @Override
     public AuthorTransfer convert(Author author) {
+        return transferring(author);
+    }
+
+    private AuthorTransfer transferring(Author author) {
         authorTransfer.setId(author.getId());
         authorTransfer.setFirstName(author.getFirstName());
         authorTransfer.setLastName(author.getLastName());
@@ -29,11 +33,7 @@ public class AuthorDtoImpl implements AuthorDto {
         List<AuthorTransfer> authorTransfers = new ArrayList<>();
         for (Author author: authors){
             authorTransfer = new AuthorTransfer();
-            authorTransfer.setId(author.getId());
-            authorTransfer.setFirstName(author.getFirstName());
-            authorTransfer.setLastName(author.getLastName());
-            authorTransfer.setYear(author.getYear());
-            authorTransfers.add(authorTransfer);
+            authorTransfers.add(transferring(author));
         }
         return authorTransfers;
     }

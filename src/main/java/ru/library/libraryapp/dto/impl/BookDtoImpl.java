@@ -17,6 +17,10 @@ public class BookDtoImpl implements BookDto {
 
     @Override
     public BookTransfer convert(Book book) {
+        return transferring(book);
+    }
+
+    private BookTransfer transferring(Book book) {
         bookTransfer.setId(book.getId());
         bookTransfer.setName(book.getName());
         bookTransfer.setDescription(book.getDescription());
@@ -30,12 +34,7 @@ public class BookDtoImpl implements BookDto {
         List<BookTransfer> bookTransfers = new ArrayList<>();
         for (Book book: books){
             bookTransfer = new BookTransfer();
-            bookTransfer.setId(book.getId());
-            bookTransfer.setName(book.getName());
-            bookTransfer.setDescription(book.getDescription());
-            bookTransfer.setPublished(book.getPublished());
-            bookTransfer.setYear(book.getYear());
-            bookTransfers.add(bookTransfer);
+            bookTransfers.add(transferring(book));
         }
         return bookTransfers;
     }
