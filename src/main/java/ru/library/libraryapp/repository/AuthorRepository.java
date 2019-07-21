@@ -8,7 +8,11 @@ import java.util.List;
 
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
-    @Query("Select b.authorSet From Book b Where b.id = 193")
+    @Query("Select b.authorSet From Book b Where b.id = 225")
     List<Author> getAuthorSetById();
+
+    @Query("Select b.firstName From Author b Where b.id = ?1")
+    Author findFirstNameById(long id);
+    //@Query(nativeQuery = true)
 
 }

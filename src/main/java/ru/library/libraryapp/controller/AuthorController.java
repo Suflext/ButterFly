@@ -15,7 +15,12 @@ public class AuthorController {
     private AuthorService authorService;
 
     @RequestMapping("/apps")
-    public List<Author> book() {
+    public List<Author> authors() {
         return authorService.getAuthorSetById();
+    }
+
+    @RequestMapping("/apps2")
+    public Author author() {
+        return authorService.findFirstNameById();
     }
 }

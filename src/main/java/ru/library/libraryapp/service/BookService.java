@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import ru.library.libraryapp.entity.Book;
 import ru.library.libraryapp.repository.BookRepository;
 
+import java.util.List;
+
 @Service
 public class BookService {
 
@@ -14,9 +16,13 @@ public class BookService {
     }
 
     public Book getBookById() {
-        Book book = bookRepo.findById(193L);
+        Book book = bookRepo.findById(225L);
         book.setAuthorSet(null);
         return book;
+    }
+
+    public List<Book> getBookSetById() {
+        return bookRepo.getBookSetById();
     }
 
 }

@@ -4,7 +4,7 @@ spring:
     change-log: "classpath:/db.changelog.yml"
 
   datasource:
-    url: jdbc:h2:~/test86
+    url: jdbc:h2:~/test85
     driverClassName: org.h2.Driver
     username: username
     password:
@@ -15,5 +15,6 @@ spring:
 
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
     hibernate:
       ddl-auto: none

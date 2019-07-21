@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.library.libraryapp.entity.Book;
 import ru.library.libraryapp.service.BookService;
 
+import java.util.List;
+
 @RestController
 public class BookController {
 
@@ -16,4 +18,10 @@ public class BookController {
     public Book books() {
         return bookService.getBookById();
     }
+
+    @RequestMapping("/app1")
+    public List<Book> book() {
+        return bookService.getBookSetById();
+    }
+
 }

@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    Book findById(long BookId);
+    Book findById(long id);
 
+    @Query("Select bookSet From Author a Where a.id = 193")
+    List<Book> getBookSetById();
 
 }
