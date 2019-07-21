@@ -16,25 +16,21 @@ public class AuthorDtoImpl implements AuthorDto {
     }
 
     @Override
-    public AuthorTransfer convert(Author author) {
-        return transferring(author);
+    public List<AuthorTransfer> convert(List<Author> authors) {
+        List<AuthorTransfer> authorTransfers = new ArrayList<>();
+        for (Author author: authors){
+            authorTransfer = new AuthorTransfer();
+            authorTransfers.add(convert(author));
+        }
+        return authorTransfers;
     }
 
-    private AuthorTransfer transferring(Author author) {
+    @Override
+    public AuthorTransfer convert(Author author) {
         authorTransfer.setId(author.getId());
         authorTransfer.setFirstName(author.getFirstName());
         authorTransfer.setLastName(author.getLastName());
         authorTransfer.setYear(author.getYear());
         return authorTransfer;
-    }
-
-    @Override
-    public List<AuthorTransfer> convert(List<Author> authors) {
-        List<AuthorTransfer> authorTransfers = new ArrayList<>();
-        for (Author author: authors){
-            authorTransfer = new AuthorTransfer();
-            authorTransfers.add(transferring(author));
-        }
-        return authorTransfers;
     }
 }

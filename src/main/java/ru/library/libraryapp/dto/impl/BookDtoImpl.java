@@ -16,26 +16,22 @@ public class BookDtoImpl implements BookDto {
     }
 
     @Override
-    public BookTransfer convert(Book book) {
-        return transferring(book);
+    public List<BookTransfer> convert(List<Book> books) {
+        List<BookTransfer> bookTransfers = new ArrayList<>();
+        for (Book book: books){
+            bookTransfer = new BookTransfer();
+            bookTransfers.add(convert(book));
+        }
+        return bookTransfers;
     }
 
-    private BookTransfer transferring(Book book) {
+    @Override
+    public BookTransfer convert(Book book) {
         bookTransfer.setId(book.getId());
         bookTransfer.setName(book.getName());
         bookTransfer.setDescription(book.getDescription());
         bookTransfer.setPublished(book.getPublished());
         bookTransfer.setYear(book.getYear());
         return bookTransfer;
-    }
-
-    @Override
-    public List<BookTransfer> convert(List<Book> books) {
-        List<BookTransfer> bookTransfers = new ArrayList<>();
-        for (Book book: books){
-            bookTransfer = new BookTransfer();
-            bookTransfers.add(transferring(book));
-        }
-        return bookTransfers;
     }
 }
