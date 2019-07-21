@@ -1,44 +1,12 @@
 package ru.library.libraryapp.dto;
 
-public class AuthorDto {
+import ru.library.libraryapp.entity.Author;
+import ru.library.libraryapp.entity.AuthorTransfer;
 
-    private long id;
+import java.util.List;
 
-    private String firstName;
+public interface AuthorDto {
+    AuthorTransfer convert(Author author);
 
-    private String lastName;
-
-    private long year;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public long getYear() {
-        return year;
-    }
-
-    public void setYear(long year) {
-        this.year = year;
-    }
+    List<AuthorTransfer> convert(List<Author> authors);
 }

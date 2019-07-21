@@ -10,5 +10,4 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     Book findByName(String FirstName);
 
     void deleteById(long id);
-
 }

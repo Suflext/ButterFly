@@ -3,6 +3,8 @@ package ru.library.libraryapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.library.libraryapp.entity.Author;
+import ru.library.libraryapp.entity.AuthorTransfer;
+import ru.library.libraryapp.entity.BookTransfer;
 import ru.library.libraryapp.service.AuthorService;
 
 import java.util.List;
@@ -25,17 +27,22 @@ public class AuthorController {
     }
 
     @RequestMapping(value = "/author/delete/{id}", method = RequestMethod.GET)
-    public void delete(@PathVariable("id") int id) {
+    public void deleteById(@PathVariable("id") int id) {
         authorService.delete(id);
     }
 
-    @RequestMapping(value = "/author/find/{id}", method = RequestMethod.GET)
-    public Author find(@PathVariable("id") int id) {
-        return authorService.findById(id);
+    @RequestMapping("/author/findAll")
+    public List<AuthorTransfer> getAll() {
+        return authorService.getAll();
     }
 
-    @RequestMapping("/author/findAll")
-    public List<Author> findAll() {
-        return authorService.getAll();
+    @RequestMapping(value = "/author/find/{id}", method = RequestMethod.GET)
+    public AuthorTransfer getById(@PathVariable("id") int id) {
+        return authorService.getById(id);
+    }
+
+    @RequestMapping(value = "/author/findAS/{id}", method = RequestMethod.GET)
+    public List<BookTransfer> getBookSetById(@PathVariable("id") int id) {
+        return authorService.getBookSetById(id);
     }
 }

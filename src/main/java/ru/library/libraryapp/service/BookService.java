@@ -1,9 +1,15 @@
 package ru.library.libraryapp.service;
 
 import org.springframework.stereotype.Service;
+import ru.library.libraryapp.dto.impl.AuthorDtoImpl;
+import ru.library.libraryapp.dto.impl.BookDtoImpl;
+import ru.library.libraryapp.entity.Author;
+import ru.library.libraryapp.entity.AuthorTransfer;
 import ru.library.libraryapp.entity.Book;
+import ru.library.libraryapp.entity.BookTransfer;
 import ru.library.libraryapp.repository.BookRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,17 +34,16 @@ public class BookService {
         bookRepo.deleteById(id);
     }
 
-    public List<Book> getAll(){
-        List<Book> authors = bookRepo.findAll();
-        for (Book item : authors)
-            item.setAuthorSet(null);
-        return authors;
+    public List<BookTransfer> getAll(){
+        return new BookDtoImpl(new BookTransfer()).convert(bookRepo.findAll());
+
     }
 
-    public Book findById(int id) {
-        Book author = bookRepo.findById(id);
-        author.setAuthorSet(null);
-        return author;
+    public BookTransfer getById(int id) {
+        return new BookDtoImpl(new BookTransfer()).convert(bookRepo.findById(id));
     }
 
+    public List<AuthorTransfer> getAuthorSetById(int id) {
+        return new AuthorDtoImpl(new AuthorTransfer()).convert(new ArrayList<>(bookRepo.findById(id).getAuthorSet()));
+    }
 }

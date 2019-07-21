@@ -1,9 +1,14 @@
 package ru.library.libraryapp.service;
 
 import org.springframework.stereotype.Service;
+import ru.library.libraryapp.dto.impl.AuthorDtoImpl;
+import ru.library.libraryapp.dto.impl.BookDtoImpl;
+import ru.library.libraryapp.entity.AuthorTransfer;
 import ru.library.libraryapp.entity.Author;
+import ru.library.libraryapp.entity.BookTransfer;
 import ru.library.libraryapp.repository.AuthorRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,24 +25,23 @@ public class AuthorService {
         return findByFirstName(author.getFirstName());
     }
 
-    private Author findByFirstName(String name){
+    private Author findByFirstName(String name) {
         return authorRepo.findByFirstName(name);
     }
 
-    public void delete(int id){
+    public void delete(int id) {
         authorRepo.deleteById(id);
     }
 
-    public List<Author> getAll(){
-        List<Author> authors = authorRepo.findAll();
-        for (Author item : authors)
-            item.setBookSet(null);
-        return authors;
+    public List<AuthorTransfer> getAll() {
+        return new AuthorDtoImpl(new AuthorTransfer()).convert(authorRepo.findAll());
     }
 
-    public Author findById(int id) {
-        Author author = authorRepo.findById(id);
-        author.setBookSet(null);
-        return author;
+    public AuthorTransfer getById(int id) {
+        return new AuthorDtoImpl(new AuthorTransfer()).convert(authorRepo.findById(id));
+    }
+
+    public List<BookTransfer> getBookSetById(int id) {
+        return new BookDtoImpl(new BookTransfer()).convert(new ArrayList<>(authorRepo.findById(id).getBookSet()));
     }
 }
