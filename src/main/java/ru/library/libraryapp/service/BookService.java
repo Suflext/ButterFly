@@ -7,27 +7,35 @@ import ru.library.libraryapp.entity.Author;
 import ru.library.libraryapp.entity.AuthorTransfer;
 import ru.library.libraryapp.entity.Book;
 import ru.library.libraryapp.entity.BookTransfer;
+import ru.library.libraryapp.repository.AuthorRepository;
 import ru.library.libraryapp.repository.BookRepository;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class BookService {
 
     private BookRepository bookRepo;
+    private AuthorRepository authorRepo;
 
-    public BookService(BookRepository bookRepo) {
+    public BookService(BookRepository bookRepo, AuthorRepository authorRepo) {
         this.bookRepo = bookRepo;
+        this.authorRepo = authorRepo;
     }
 
-    public Book add(Book book) {
+    public BookTransfer add(Book book, int authorId) {
+        Set<Author> authorSet = new HashSet<>();
+        authorSet.add(authorRepo.findById(authorId));
+        book.setAuthorSet(authorSet);
         bookRepo.save(book);
         return findByName(book.getName());
     }
 
-    private Book findByName(String name){
-        return bookRepo.findByName(name);
+    private BookTransfer findByName(String name){
+        return new BookDtoImpl(new BookTransfer()).convert(bookRepo.findByName(name));
     }
 
     public void delete(int id){

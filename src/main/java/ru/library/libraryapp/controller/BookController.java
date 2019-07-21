@@ -16,16 +16,17 @@ public class BookController {
     private BookService bookService;
 
     @RequestMapping(value = "/book/add", method = RequestMethod.GET)
-    public Book add(@RequestParam("name") String name,
+    public BookTransfer add(@RequestParam("name") String name,
                     @RequestParam("description") String description,
                     @RequestParam("published") String published,
-                    @RequestParam("year") int year) {
+                    @RequestParam("year") int year,
+                    @RequestParam("authorId") int authorId) {
         Book book = new Book();
         book.setName(name);
         book.setDescription(description);
         book.setPublished(published);
         book.setYear(year);
-        return bookService.add(book);
+        return bookService.add(book, authorId);
     }
 
     @RequestMapping(value = "/book/delete/{id}", method = RequestMethod.GET)

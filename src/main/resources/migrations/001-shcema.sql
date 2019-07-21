@@ -4,8 +4,8 @@
 --changeset author:schema-init
 create table Author (
     id AUTOINCREMENT PRIMARY KEY,
-    firstName varchar (255),
-    lastName varchar (255),
+    first_Name varchar (255),
+    last_Name varchar (255),
     year int
 );
 

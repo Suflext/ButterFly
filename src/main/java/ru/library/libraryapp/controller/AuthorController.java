@@ -16,7 +16,7 @@ public class AuthorController {
     private AuthorService authorService;
 
     @RequestMapping(value = "/author/add", method = RequestMethod.GET)
-    public Author add(@RequestParam("firstName") String firstName,
+    public AuthorTransfer add(@RequestParam("firstName") String firstName,
                       @RequestParam("lastName") String lastNaem,
                       @RequestParam("year") int year) {
         Author author = new Author();

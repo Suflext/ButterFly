@@ -20,13 +20,13 @@ public class AuthorService {
         this.authorRepo = authorRepo;
     }
 
-    public Author add(Author author) {
+    public AuthorTransfer add(Author author) {
         authorRepo.save(author);
         return findByFirstName(author.getFirstName());
     }
 
-    private Author findByFirstName(String name) {
-        return authorRepo.findByFirstName(name);
+    private AuthorTransfer findByFirstName(String name) {
+        return new AuthorDtoImpl(new AuthorTransfer()).convert(authorRepo.findByFirstName(name));
     }
 
     public void delete(int id) {
